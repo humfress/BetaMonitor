@@ -10,7 +10,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ParticleDefinition.hh"
 
-#include "BM_Detector.hh"
+#include "BM_Telescope.hh"
 #include "BM_Output.hh"
 
 BM_SD::BM_SD(G4String name, G4String HCName) : G4VSensitiveDetector(name),

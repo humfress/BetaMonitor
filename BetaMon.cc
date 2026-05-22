@@ -30,7 +30,7 @@
 #include "G4PhysListFactory.hh"
 #include "G4RadioactiveDecayPhysics.hh"
 #include "G4DecayPhysics.hh"
-#include "BM_Detector.hh"
+#include "BM_Telescope.hh"
 #include "BM_PrimaryGenerator.hh"
 #include "BM_Output.hh"
 
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
   runManager->SetVerboseLevel(1);
 
   // initialize detector
-  runManager->SetUserInitialization(new BM_Detector());
+  runManager->SetUserInitialization(new BM_Telescope());
   
   // initialize physics list - use a standard one for now
   G4PhysListFactory factory;

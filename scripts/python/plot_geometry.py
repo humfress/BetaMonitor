@@ -135,6 +135,7 @@ class GeometryPlotter:
                 return np.eye(3)
             angles = r.eval() if hasattr(r, 'eval') else [float(r.x.eval()), float(r.y.eval()), float(r.z.eval())]
             rx, ry, rz = [float(a) for a in angles]
+            ry = -ry
             cx, sx = np.cos(rx), np.sin(rx)
             cy, sy = np.cos(ry), np.sin(ry)
             cz, sz = np.cos(rz), np.sin(rz)
@@ -567,7 +568,7 @@ class GeometryPlotter:
 
 
 if __name__ == "__main__":
-    plotter = GeometryPlotter("output/geometry_export.gdml")
+    plotter = GeometryPlotter("output/geometry_telescope_export.gdml")
     # plotter = GeometryPlotter("/Users/harperumfress/UW/betamonitor_data/original_singlethread_data/geometry_export.gdml")
     plotter.plot_three_view_2d()
     plotter.print_vol_names()
