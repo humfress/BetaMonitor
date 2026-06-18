@@ -13,9 +13,12 @@
 #include "G4UniformMagField.hh"
 #include "G4SDManager.hh"
 
+#include <memory>
+
 class G4VPhysicalVolume;
 class G4LogicalVolume;
 class MagField;
+class G4GenericMessenger;
 
 /// Detector construction class to define materials and geometry.
 
@@ -42,6 +45,8 @@ public:
 
 protected:
   G4LogicalVolume *fScoringVolume;
+  G4String fGdmlFile;
+  std::unique_ptr<G4GenericMessenger> fMessenger;
 };
 
 #endif
