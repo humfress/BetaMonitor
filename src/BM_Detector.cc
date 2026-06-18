@@ -23,7 +23,7 @@ G4UniformMagField *BM_Detector::fMagneticField = 0;
 
 BM_Detector::BM_Detector() : G4VUserDetectorConstruction(), vacuumLV(nullptr), 
 vacuumWindowLV(nullptr), aScintillatorLV(nullptr), bScintillatorLV(nullptr), logicWorld(nullptr),
-fGdmlFile("../output/geometry_export.gdml")
+fGdmlFile("../dat/geometry_telescope_export.gdml")
 {
   fMessenger = std::make_unique<G4GenericMessenger>(this, "/bm/det/", "Detector controls");
   fMessenger->DeclareProperty("gdmlFile", fGdmlFile,
@@ -36,7 +36,7 @@ G4VPhysicalVolume *BM_Detector::Construct()
 {
   G4cout << "Loading detector geometry from GDML." << G4endl;
 
-  static const G4String kDefaultGdmlPath = "../output/geometry_export.gdml";
+  static const G4String kDefaultGdmlPath = "../dat/geometry_telescope_export.gdml";
   const char *gdmlPathEnv = std::getenv("BM_GDML_FILE");
   G4String gdmlPath = fGdmlFile.empty() ? kDefaultGdmlPath : fGdmlFile;
   if (gdmlPath == kDefaultGdmlPath && gdmlPathEnv && gdmlPathEnv[0] != '\0')
