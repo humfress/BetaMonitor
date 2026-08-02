@@ -78,6 +78,21 @@ Because the primary particle generation process is using the radioactive decay m
 # Detector & Decay Volume Geometry
 All physical objects are defined within ```src/BM_Detector.cc```. Adding new detectors will require the creation of a new ```logicDetector``` within ```include/BM_Detector.hh```. The detector will then be assigned to a sensitive detector. To properly associate the events with the detector, adjust the HitsCollection within ```include/BM_EventAction.hh```, and ```src/BM_EventAction.cc```. If a new designation is required beyond the provided ```trigger, square, window, vac```, a new case statement will need to be added to ```src/BM_EventAction.cc```.
 
+## Generating GDML Geometry
+
+From the repository root, activate the Conda environment containing `pyg4ometry` and run the generator:
+
+```bash
+conda activate g4-env-py311
+python scripts/python/gdml_create_betamon.py
+```
+
+This writes `dat/geometry_export_new.gdml`. Pass a path to write the geometry elsewhere:
+
+```bash
+python scripts/python/gdml_create_betamon.py dat/geometry_export.gdml
+```
+
 # BetaMonitor Implementation Details
 ## Data Flow
 ```text

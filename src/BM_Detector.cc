@@ -7,6 +7,10 @@
 #include "G4LogicalVolumeStore.hh"
 #include "G4GDMLParser.hh"
 #include "G4GenericMessenger.hh"
+#include "G4Box.hh"
+#include "G4LogicalVolume.hh"
+#include "G4NistManager.hh"
+#include "G4PVPlacement.hh"
 
 #include "G4ThreeVector.hh"
 #include "G4SystemOfUnits.hh"
@@ -23,7 +27,7 @@ G4UniformMagField *BM_Detector::fMagneticField = 0;
 
 BM_Detector::BM_Detector() : G4VUserDetectorConstruction(), vacuumLV(nullptr), 
 vacuumWindowLV(nullptr), aScintillatorLV(nullptr), bScintillatorLV(nullptr), logicWorld(nullptr),
-fGdmlFile("../dat/original_geometry_export.gdml")
+fGdmlFile("")
 {
   fMessenger = std::make_unique<G4GenericMessenger>(this, "/bm/det/", "Detector controls");
   fMessenger->DeclareProperty("gdmlFile", fGdmlFile,
@@ -34,21 +38,23 @@ BM_Detector::~BM_Detector() {}
 
 G4VPhysicalVolume *BM_Detector::Construct()
 {
-  G4cout << "Loading detector geometry from GDML." << G4endl;
-
-  static const G4String kDefaultGdmlPath = "../dat/original_geometry_export.gdml";
-  const char *gdmlPathEnv = std::getenv("BM_GDML_FILE");
-  G4String gdmlPath = fGdmlFile.empty() ? kDefaultGdmlPath : fGdmlFile;
-  if (gdmlPath == kDefaultGdmlPath && gdmlPathEnv && gdmlPathEnv[0] != '\0')
+  if (fGdmlFile.empty())
   {
-    gdmlPath = G4String(gdmlPathEnv);
+    G4cerr << "Warning: detector geometry is unspecified; constructing an empty world." << G4endl;
+
+    auto *nist = G4NistManager::Instance();
+    auto *worldMaterial = nist->FindOrBuildMaterial("G4_Galactic");
+    auto *worldSolid = new G4Box("World", 400.0 * mm, 400.0 * mm, 450.0 * mm);
+    logicWorld = new G4LogicalVolume(worldSolid, worldMaterial, "World");
+    return new G4PVPlacement(nullptr, G4ThreeVector(), logicWorld, "World", nullptr, false, 0, false);
   }
 
-  G4cout << "GDML input file: " << gdmlPath << G4endl;
+  G4cout << "Loading detector geometry from GDML." << G4endl;
+  G4cout << "GDML input file: " << fGdmlFile << G4endl;
 
   G4GDMLParser parser;
   parser.SetOverlapCheck(true);
-  parser.Read(gdmlPath, false);
+  parser.Read(fGdmlFile, false);
 
   G4VPhysicalVolume *physWorld = parser.GetWorldVolume();
   if (!physWorld)
@@ -87,6 +93,13 @@ void BM_Detector::ConstructSDandField()
   https://geant4-forum.web.cern.ch/t/constructsdandfield-in-multi-threaded-mode/2986
   */
   SDMan = G4SDManager::GetSDMpointer();
+
+  if (!vacuumLV || !vacuumWindowLV || !aScintillatorLV || !bScintillatorLV)
+  {
+    G4cerr << "Warning: skipping detector-sensitive volume setup because no GDML geometry was loaded." << G4endl;
+    fScoringVolume = logicWorld;
+    return;
+  }
 
   G4VSensitiveDetector *bScintillatorSD = new BM_SD("BScintillatorSD", "BScintillatorHC"); // trigger
   G4VSensitiveDetector *aScintillatorSD = new BM_SD("AScintillatorSD", "AScintillatorHC");

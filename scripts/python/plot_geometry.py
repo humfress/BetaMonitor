@@ -568,10 +568,11 @@ class GeometryPlotter:
 
 
 if __name__ == "__main__":
-    plotter = GeometryPlotter("/Users/harperumfress/dev/BetaMonitor/dat/betamon_geometry.gdml")
+    plotter = GeometryPlotter("/Users/harperumfress/dev/BetaMonitor/dat/geometry_export_new.gdml")
+    # dat/geometry_export_new.gdml
     # plotter = GeometryPlotter("/Users/harperumfress/dev/BetaMonitor/dat/original_geometry_export.gdml")
     # plotter = GeometryPlotter("/Users/harperumfress/UW/betamonitor_data/original_singlethread_data/geometry_export.gdml")
-    plotter.plot_three_view_2d()
+    plotter.plot_three_view_2d(annotate=False)
     plotter.print_vol_names()
 
     v = plotter.plot_by_volume(vol_select='SourceCal')

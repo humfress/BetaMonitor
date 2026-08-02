@@ -1,0 +1,353 @@
+<?xml version="1.0" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+	<define/>
+	<materials>
+		<element name="Hydrogen" formula="H" Z="1">
+			<atom value="1.008"/>
+		</element>
+		<element name="Oxygen" formula="O" Z="8">
+			<atom value="15.999"/>
+		</element>
+		<element name="Silicon" formula="Si" Z="14">
+			<atom value="28.085"/>
+		</element>
+		<element name="Chromium" formula="Cr" Z="24">
+			<atom value="51.996"/>
+		</element>
+		<element name="Manganese" formula="Mn" Z="25">
+			<atom value="54.938"/>
+		</element>
+		<element name="Iron" formula="Fe" Z="26">
+			<atom value="55.845"/>
+		</element>
+		<element name="Nickel" formula="Ni" Z="28">
+			<atom value="58.693"/>
+		</element>
+		<material name="interGalactic" state="gas">
+			<D value="1e-25"/>
+			<fraction ref="Hydrogen" n="1.0"/>
+		</material>
+		<material name="Stainless_Steel" state="solid">
+			<D value="8.03"/>
+			<fraction ref="Iron" n="0.72"/>
+			<fraction ref="Chromium" n="0.18"/>
+			<fraction ref="Nickel" n="0.08"/>
+			<fraction ref="Manganese" n="0.02"/>
+		</material>
+		<material name="Vetronite" state="solid">
+			<D value="2.0"/>
+			<fraction ref="Silicon" n="0.467434920603219"/>
+			<fraction ref="Oxygen" n="0.532565079396781"/>
+		</material>
+	</materials>
+	<solids>
+		<tube name="Pipe1i" rmin="0.0" rmax="17.399" z="196.85" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="Pipe2i" rmin="0.0" rmax="17.399" z="98.425" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<union name="InnerTPipe">
+			<first ref="Pipe1i"/>
+			<second ref="Pipe2i"/>
+			<position name="InnerTPipe_translation" x="-49.212499999999999" y="0.000000000000000" z="0.000000000000000" unit="mm"/>
+			<rotation name="InnerTPipe_rotation" x="0.000000000000000" y="-90.000000000000000" z="0.000000000000000" unit="deg"/>
+		</union>
+		<tube name="Pipe1o" rmin="0.0" rmax="19.05" z="171.45" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="Pipe2o" rmin="0.0" rmax="19.05" z="85.725" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<union name="OuterTPipe">
+			<first ref="Pipe1o"/>
+			<second ref="Pipe2o"/>
+			<position name="OuterTPipe_translation" x="-42.862499999999997" y="0.000000000000000" z="0.000000000000000" unit="mm"/>
+			<rotation name="OuterTPipe_rotation" x="0.000000000000000" y="-90.000000000000000" z="0.000000000000000" unit="deg"/>
+		</union>
+		<tube name="Pipe1i_tol" rmin="0.0" rmax="17.399001000000002" z="184.15" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<subtraction name="TDecayVolume">
+			<first ref="OuterTPipe"/>
+			<second ref="Pipe1i_tol"/>
+		</subtraction>
+		<tube name="Pipe2i_tol" rmin="0.0" rmax="17.399001000000002" z="98.425" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<subtraction name="TDecayVolume2">
+			<first ref="TDecayVolume"/>
+			<second ref="Pipe2i_tol"/>
+			<position name="TDecayVolume2_translation" x="-42.862499999999997" y="0.000000000000000" z="0.000000000000000" unit="mm"/>
+			<rotation name="TDecayVolume2_rotation" x="0.000000000000000" y="-90.000000000000000" z="0.000000000000000" unit="deg"/>
+		</subtraction>
+		<tube name="FlangeScint" rmin="10.0" rmax="34.544" z="12.7" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="Flange" rmin="17.399" rmax="34.544" z="12.7" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="VacuumWindowDisk" rmin="0.0" rmax="17.399" z="0.0762" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<polycone name="WedgeRevolvedRing" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg">
+			<zplane rmin="9.906" rmax="17.399" z="0.0"/>
+			<zplane rmin="9.906" rmax="17.399" z="1.0"/>
+			<zplane rmin="17.398999" rmax="17.399" z="7.0"/>
+		</polycone>
+		<box name="AScintCore" x="20.0" y="20.0" z="3.0" lunit="mm"/>
+		<box name="AScintInnerGeom" x="20.0002" y="20.0002" z="3.0002" lunit="mm"/>
+		<subtraction name="AScintInnerAl">
+			<first ref="AScintInnerGeom"/>
+			<second ref="AScintCore"/>
+		</subtraction>
+		<box name="AScintMylarGeom" x="20.1522" y="20.1522" z="3.1522" lunit="mm"/>
+		<subtraction name="AScintMylar">
+			<first ref="AScintMylarGeom"/>
+			<second ref="AScintInnerGeom"/>
+		</subtraction>
+		<box name="AScintOuterGeom" x="20.1524" y="20.1524" z="3.1524" lunit="mm"/>
+		<subtraction name="AScintOuterAl">
+			<first ref="AScintOuterGeom"/>
+			<second ref="AScintMylarGeom"/>
+		</subtraction>
+		<box name="BScintCore" x="20.0" y="20.0" z="3.0" lunit="mm"/>
+		<box name="BScintInnerGeom" x="20.0002" y="20.0002" z="3.0002" lunit="mm"/>
+		<subtraction name="BScintInnerAl">
+			<first ref="BScintInnerGeom"/>
+			<second ref="BScintCore"/>
+		</subtraction>
+		<box name="BScintMylarGeom" x="20.1522" y="20.1522" z="3.1522" lunit="mm"/>
+		<subtraction name="BScintMylar">
+			<first ref="BScintMylarGeom"/>
+			<second ref="BScintInnerGeom"/>
+		</subtraction>
+		<box name="BScintOuterGeom" x="20.1524" y="20.1524" z="3.1524" lunit="mm"/>
+		<subtraction name="BScintOuterAl">
+			<first ref="BScintOuterGeom"/>
+			<second ref="BScintMylarGeom"/>
+		</subtraction>
+		<tube name="sipmLidBase" rmin="5.08" rmax="60.325" z="8.89" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="sipmLidSource" rmin="0.0" rmax="6.325001" z="8.89" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<subtraction name="sipmLid">
+			<first ref="sipmLidBase"/>
+			<second ref="sipmLidSource"/>
+			<position name="sipmLid_translation" x="0.000000000000000" y="0.000000000000000" z="-1.206400000000000" unit="mm"/>
+		</subtraction>
+		<box name="scintHolderbase" x="22.2" y="22.2" z="30.4434" lunit="mm"/>
+		<box name="scintHoldercutout20" x="16.3" y="16.3" z="50.4434" lunit="mm"/>
+		<subtraction name="scintHolder10">
+			<first ref="scintHolderbase"/>
+			<second ref="scintHoldercutout20"/>
+		</subtraction>
+		<box name="scintHoldercutout10" x="20.5" y="20.5" z="29.4434" lunit="mm"/>
+		<subtraction name="scintHolder">
+			<first ref="scintHolder10"/>
+			<second ref="scintHoldercutout10"/>
+		</subtraction>
+		<tube name="scintHolderbaseRing" rmin="10.0" rmax="22.86" z="1.575" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<box name="scintSleevebase" x="20.5" y="20.5" z="10.0" lunit="mm"/>
+		<box name="scintHoldercutout20b" x="13.5" y="13.5" z="20.0" lunit="mm"/>
+		<subtraction name="scintSleeve">
+			<first ref="scintSleevebase"/>
+			<second ref="scintHoldercutout20b"/>
+		</subtraction>
+		<tube name="SourceAlo" rmin="4.694999" rmax="6.325" z="3.1749" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="SourceAl1" rmin="0.0" rmax="6.325" z="12.7" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="SourceAl2" rmin="0.0" rmax="3.1623" z="6.3498" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<subtraction name="SourceAl">
+			<first ref="SourceAl1"/>
+			<second ref="SourceAl2"/>
+			<position name="SourceAl_translation" x="0.000000000000000" y="0.000000000000000" z="-4.762550000000000" unit="mm"/>
+		</subtraction>
+		<tube name="SourceMy" rmin="0.0" rmax="4.694999" z="0.0064" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<tube name="SourceCal" rmin="0.0" rmax="4.694999" z="0.001" startphi="0.0" deltaphi="360.0" lunit="mm" aunit="deg"/>
+		<box name="World" x="400.0" y="400.0" z="450.0" lunit="mm"/>
+	</solids>
+	<structure>
+		<volume name="Vacuum">
+			<materialref ref="interGalactic"/>
+			<solidref ref="InnerTPipe"/>
+		</volume>
+		<volume name="SteelTPipe">
+			<materialref ref="Stainless_Steel"/>
+			<solidref ref="TDecayVolume2"/>
+		</volume>
+		<volume name="tPipeFlangeScint">
+			<materialref ref="Stainless_Steel"/>
+			<solidref ref="FlangeScint"/>
+		</volume>
+		<volume name="tPipeFlange1">
+			<materialref ref="Stainless_Steel"/>
+			<solidref ref="Flange"/>
+		</volume>
+		<volume name="tPipeFlange2">
+			<materialref ref="Stainless_Steel"/>
+			<solidref ref="Flange"/>
+		</volume>
+		<volume name="tPipeFlange3">
+			<materialref ref="Stainless_Steel"/>
+			<solidref ref="Flange"/>
+		</volume>
+		<volume name="VacuumWindow">
+			<materialref ref="G4_Al"/>
+			<solidref ref="VacuumWindowDisk"/>
+		</volume>
+		<volume name="WedgeRevolvedRingLV">
+			<materialref ref="Stainless_Steel"/>
+			<solidref ref="WedgeRevolvedRing"/>
+		</volume>
+		<volume name="AScintillator">
+			<materialref ref="G4_PLASTIC_SC_VINYLTOLUENE"/>
+			<solidref ref="AScintCore"/>
+		</volume>
+		<volume name="Ali_sq10">
+			<materialref ref="G4_Al"/>
+			<solidref ref="AScintInnerAl"/>
+		</volume>
+		<volume name="Mylar_sq10">
+			<materialref ref="G4_MYLAR"/>
+			<solidref ref="AScintMylar"/>
+		</volume>
+		<volume name="Alo_sq10">
+			<materialref ref="G4_Al"/>
+			<solidref ref="AScintOuterAl"/>
+		</volume>
+		<volume name="BScintillatorLV">
+			<materialref ref="G4_PLASTIC_SC_VINYLTOLUENE"/>
+			<solidref ref="BScintCore"/>
+		</volume>
+		<volume name="Ali_sq20">
+			<materialref ref="G4_Al"/>
+			<solidref ref="BScintInnerAl"/>
+		</volume>
+		<volume name="Mylar_sq20">
+			<materialref ref="G4_MYLAR"/>
+			<solidref ref="BScintMylar"/>
+		</volume>
+		<volume name="Alo_sq20">
+			<materialref ref="G4_Al"/>
+			<solidref ref="BScintOuterAl"/>
+		</volume>
+		<volume name="sipm_Lid">
+			<materialref ref="G4_Cu"/>
+			<solidref ref="sipmLid"/>
+		</volume>
+		<volume name="scint_holder">
+			<materialref ref="Vetronite"/>
+			<solidref ref="scintHolder"/>
+		</volume>
+		<volume name="scint_holderBase">
+			<materialref ref="Vetronite"/>
+			<solidref ref="scintHolderbaseRing"/>
+		</volume>
+		<volume name="scint_Sleeve">
+			<materialref ref="G4_Al"/>
+			<solidref ref="scintSleeve"/>
+		</volume>
+		<volume name="SourceAlo">
+			<materialref ref="G4_Al"/>
+			<solidref ref="SourceAlo"/>
+		</volume>
+		<volume name="SourceAl">
+			<materialref ref="G4_Al"/>
+			<solidref ref="SourceAl"/>
+		</volume>
+		<volume name="SourceMy">
+			<materialref ref="G4_MYLAR"/>
+			<solidref ref="SourceMy"/>
+		</volume>
+		<volume name="SourceCal">
+			<materialref ref="G4_Al"/>
+			<solidref ref="SourceCal"/>
+		</volume>
+		<volume name="World">
+			<materialref ref="G4_AIR"/>
+			<solidref ref="World"/>
+			<physvol name="Vacuum" copynumber="1">
+				<volumeref ref="Vacuum"/>
+				<position name="Vacuum_pos" x="0.000000000000000" y="0.000000000000000" z="98.424999999999997" unit="mm"/>
+				<rotation name="Vacuum_rot" x="0.000000000000000" y="90.000000000000000" z="0.000000000000000" unit="deg"/>
+			</physvol>
+			<physvol name="SteelTPipe">
+				<volumeref ref="SteelTPipe"/>
+				<position name="SteelTPipe_pos" x="0.000000000000000" y="0.000000000000000" z="98.424999999999997" unit="mm"/>
+				<rotation name="SteelTPipe_rot" x="0.000000000000000" y="90.000000000000000" z="0.000000000000000" unit="deg"/>
+			</physvol>
+			<physvol name="tPipeFlangeScint">
+				<volumeref ref="tPipeFlangeScint"/>
+				<position name="tPipeFlangeScint_pos" x="0.000000000000000" y="0.000000000000000" z="-6.350000000000000" unit="mm"/>
+			</physvol>
+			<physvol name="tPipeFlange1">
+				<volumeref ref="tPipeFlange1"/>
+				<position name="tPipeFlange1_pos" x="0.000000000000000" y="0.000000000000000" z="6.350000000000000" unit="mm"/>
+			</physvol>
+			<physvol name="tPipeFlange2">
+				<volumeref ref="tPipeFlange2"/>
+				<position name="tPipeFlange2_pos" x="92.075000000000003" y="0.000000000000000" z="98.424999999999997" unit="mm"/>
+				<rotation name="tPipeFlange2_rot" x="0.000000000000000" y="90.000000000000000" z="0.000000000000000" unit="deg"/>
+			</physvol>
+			<physvol name="tPipeFlange3">
+				<volumeref ref="tPipeFlange3"/>
+				<position name="tPipeFlange3_pos" x="-92.075000000000003" y="0.000000000000000" z="98.424999999999997" unit="mm"/>
+				<rotation name="tPipeFlange3_rot" x="0.000000000000000" y="90.000000000000000" z="0.000000000000000" unit="deg"/>
+			</physvol>
+			<physvol name="VacuumWindow" copynumber="2">
+				<volumeref ref="VacuumWindow"/>
+				<position name="VacuumWindow_pos" x="0.000000000000000" y="0.000000000000000" z="-0.038100000000000" unit="mm"/>
+			</physvol>
+			<physvol name="WedgeRevolvedRingLV">
+				<volumeref ref="WedgeRevolvedRingLV"/>
+			</physvol>
+			<physvol name="AScintillator" copynumber="3">
+				<volumeref ref="AScintillator"/>
+				<position name="AScintillator_pos" x="0.000000000000000" y="0.000000000000000" z="-9.983599999999999" unit="mm"/>
+			</physvol>
+			<physvol name="Ali_sq10">
+				<volumeref ref="Ali_sq10"/>
+				<position name="Ali_sq10_pos" x="0.000000000000000" y="0.000000000000000" z="-9.983599999999999" unit="mm"/>
+			</physvol>
+			<physvol name="Mylar_sq10">
+				<volumeref ref="Mylar_sq10"/>
+				<position name="Mylar_sq10_pos" x="0.000000000000000" y="0.000000000000000" z="-9.983599999999999" unit="mm"/>
+			</physvol>
+			<physvol name="Alo_sq10">
+				<volumeref ref="Alo_sq10"/>
+				<position name="Alo_sq10_pos" x="0.000000000000000" y="0.000000000000000" z="-9.983599999999999" unit="mm"/>
+			</physvol>
+			<physvol name="BScintillatorLV" copynumber="4">
+				<volumeref ref="BScintillatorLV"/>
+				<position name="BScintillatorLV_pos" x="0.000000000000000" y="0.000000000000000" z="-13.135999999999999" unit="mm"/>
+			</physvol>
+			<physvol name="Ali_sq20">
+				<volumeref ref="Ali_sq20"/>
+				<position name="Ali_sq20_pos" x="0.000000000000000" y="0.000000000000000" z="-13.135999999999999" unit="mm"/>
+			</physvol>
+			<physvol name="Mylar_sq20">
+				<volumeref ref="Mylar_sq20"/>
+				<position name="Mylar_sq20_pos" x="0.000000000000000" y="0.000000000000000" z="-13.135999999999999" unit="mm"/>
+			</physvol>
+			<physvol name="Alo_sq20">
+				<volumeref ref="Alo_sq20"/>
+				<position name="Alo_sq20_pos" x="0.000000000000000" y="0.000000000000000" z="-13.135999999999999" unit="mm"/>
+			</physvol>
+			<physvol name="sipm_Lid">
+				<volumeref ref="sipm_Lid"/>
+				<position name="sipm_Lid_pos" x="0.000000000000000" y="0.000000000000000" z="-44.370800000000003" unit="mm"/>
+			</physvol>
+			<physvol name="scint_holder">
+				<volumeref ref="scint_holder"/>
+				<position name="scint_holder_pos" x="0.000000000000000" y="0.000000000000000" z="-23.129100000000001" unit="mm"/>
+			</physvol>
+			<physvol name="scint_holderBase">
+				<volumeref ref="scint_holderBase"/>
+				<position name="scint_holderBase_pos" x="0.000000000000000" y="0.000000000000000" z="-39.138300000000001" unit="mm"/>
+			</physvol>
+			<physvol name="scint_Sleeve">
+				<volumeref ref="scint_Sleeve"/>
+				<position name="scint_Sleeve_pos" x="0.000000000000000" y="0.000000000000000" z="-19.712199999999999" unit="mm"/>
+			</physvol>
+			<physvol name="SourceAlo">
+				<volumeref ref="SourceAlo"/>
+				<position name="SourceAlo_pos" x="0.000000000000000" y="0.000000000000000" z="-42.719650999999999" unit="mm"/>
+			</physvol>
+			<physvol name="SourceAl">
+				<volumeref ref="SourceAl"/>
+				<position name="SourceAl_pos" x="0.000000000000000" y="0.000000000000000" z="-50.657102000000002" unit="mm"/>
+			</physvol>
+			<physvol name="SourceMy">
+				<volumeref ref="SourceMy"/>
+				<position name="SourceMy_pos" x="0.000000000000000" y="0.000000000000000" z="-42.719650000000001" unit="mm"/>
+			</physvol>
+			<physvol name="SourceCal" copynumber="1">
+				<volumeref ref="SourceCal"/>
+				<position name="SourceCal_pos" x="0.000000000000000" y="0.000000000000000" z="-44.306600000000003" unit="mm"/>
+			</physvol>
+		</volume>
+	</structure>
+	<setup name="Default" version="1.0">
+		<world ref="World"/>
+	</setup>
+</gdml>
