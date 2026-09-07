@@ -30,7 +30,6 @@ In the build directory, running the following command will launch the BetaMonito
 ## Running Simulations via Macro. 
 The details of the simulation are controlled via macro. In /BetaMonitor/Scripts/Macros there are several pre-configured macros for simple simulations. An example of the macro file for 6He is repeated below:
 
-
 /run/initialize 
 
 This time threshold is important for capturing decay products that are appropriate for the timescale of the experiement For a given species, look at the decay chain and confirm if this value needs to be adjusted to something shorter (ex: for 241Am, a value of ~1e4 years will prevent an unstable daughter nuclear with T_1/2 of 1e5 years from dominating the decay spectrum)
@@ -76,7 +75,6 @@ For the geometry, the user must set a bounding volume based on the overall BetaM
 Because the primary particle generation process is using the radioactive decay module (RDM), there is no need for the user to specify the particle type of the decay products (e.g., electron or positron). All decay products will be handled and simulated by RDM. 
 
 # Detector & Decay Volume Geometry
-All physical objects are defined within ```src/BM_Detector.cc```. Adding new detectors will require the creation of a new ```logicDetector``` within ```include/BM_Detector.hh```. The detector will then be assigned to a sensitive detector. To properly associate the events with the detector, adjust the HitsCollection within ```include/BM_EventAction.hh```, and ```src/BM_EventAction.cc```. If a new designation is required beyond the provided ```trigger, square, window, vac```, a new case statement will need to be added to ```src/BM_EventAction.cc```.
 
 ## Generating GDML Geometry
 
