@@ -306,7 +306,7 @@ def build_geometry(output_path: str | Path, params: GeometryParams = PARAMS) -> 
     placements = (
         ("Vacuum", "interGalactic", "VacuumWithWedgeCutout", (0.0, 0.0, p.world_pipe_z), (0.0, 90.0, 0.0), 1),
         ("SteelTPipe", "Stainless_Steel", "TDecayVolume2", (0.0, 0.0, p.world_pipe_z), (0.0, 90.0, 0.0), 0),
-        ("tPipeFlangeScint", "Stainless_Steel", "Flange", (0.0, 0.0, p.flange_scint_z), (0.0, 0.0, 0.0), 0),
+        # ("tPipeFlangeScint", "Stainless_Steel", "Flange", (0.0, 0.0, p.flange_scint_z), (0.0, 0.0, 0.0), 0),
         ("tPipeFlange1", "Stainless_Steel", "Flange", (0.0, 0.0, p.flange_1_z), (0.0, 0.0, 0.0), 0),
         ("tPipeFlange2", "Stainless_Steel", "Flange", (p.flange_side_offset_x, 0.0, p.flange_side_z), (0.0, 90.0, 0.0), 0),
         ("tPipeFlange3", "Stainless_Steel", "Flange", (-p.flange_side_offset_x, 0.0, p.flange_side_z), (0.0, 90.0, 0.0), 0),

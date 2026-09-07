@@ -1,3 +1,4 @@
+/bm/det/gdmlFile ../dat/geometry_export_new.gdml
 /run/initialize
 /process/had/rdm/thresholdForVeryLongDecayTime 1.0e+60 year
 /gps/particle ion
@@ -10,4 +11,4 @@
 /gps/pos/halfz 0.0005 cm
 /gps/pos/centre 0 0 -4.43071 cm
 /gps/pos/confine SourceCal
-/run/beamOn 1000000
+/run/beamOn 10000000

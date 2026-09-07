@@ -575,7 +575,7 @@ if __name__ == "__main__":
     plotter.plot_three_view_2d(annotate=False)
     plotter.print_vol_names()
 
-    v = plotter.plot_by_volume(vol_select='SourceCal')
+    v = plotter.plot_by_volume(vol_select='tPipeFlangeScint')
     v.ren.GetActiveCamera().SetPosition(-100, 0, 0)
     v.ren.GetActiveCamera().SetFocalPoint(0, 0, 0)
 

@@ -3,7 +3,7 @@
 /process/had/rdm/thresholdForVeryLongDecayTime 1.0e+60 year
 /gps/particle ion
 /gps/energy 0 keV
-/gps/ion 38 90 0 0   # Z=27 (Co), A=60, Q=0, E=0
+/gps/ion 27 60 0 0   # Z=27 (Co), A=60, Q=0, E=0
 /gps/number 1
 /gps/pos/type Volume
 /gps/pos/shape Cylinder

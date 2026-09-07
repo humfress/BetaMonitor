@@ -144,10 +144,6 @@
 			<materialref ref="Stainless_Steel"/>
 			<solidref ref="TDecayVolume2"/>
 		</volume>
-		<volume name="tPipeFlangeScint">
-			<materialref ref="Stainless_Steel"/>
-			<solidref ref="Flange"/>
-		</volume>
 		<volume name="tPipeFlange1">
 			<materialref ref="Stainless_Steel"/>
 			<solidref ref="Flange"/>
@@ -244,10 +240,6 @@
 				<volumeref ref="SteelTPipe"/>
 				<position name="SteelTPipe_pos" x="0.000000000000000" y="0.000000000000000" z="98.424999999999997" unit="mm"/>
 				<rotation name="SteelTPipe_rot" x="0.000000000000000" y="90.000000000000000" z="0.000000000000000" unit="deg"/>
-			</physvol>
-			<physvol name="tPipeFlangeScint">
-				<volumeref ref="tPipeFlangeScint"/>
-				<position name="tPipeFlangeScint_pos" x="0.000000000000000" y="0.000000000000000" z="-6.350000000000000" unit="mm"/>
 			</physvol>
 			<physvol name="tPipeFlange1">
 				<volumeref ref="tPipeFlange1"/>
