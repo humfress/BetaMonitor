@@ -85,7 +85,7 @@ conda activate g4-env-py311
 python scripts/python/gdml_create_betamon.py
 ```
 
-This writes `dat/geometry_export_new.gdml`. Pass a path to write the geometry elsewhere:
+This writes `dat/betamon_geometry.gdml`. Pass a path to write the geometry elsewhere:
 
 ```bash
 python scripts/python/gdml_create_betamon.py dat/geometry_export.gdml

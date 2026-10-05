@@ -1,5 +1,5 @@
 # Set the geometry file here
-/bm/det/gdmlFile ../dat/geometry_export_new.gdml
+/bm/det/gdmlFile ../dat/betamon_geometry.gdml
 
 # Macro file for the initialization of example B1
 # in interactive session

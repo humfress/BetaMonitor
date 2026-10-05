@@ -1,3 +1,4 @@
+/bm/det/gdmlFile ../dat/betamon_geometry.gdml
 /run/initialize
 # for 241Am, using a different time threshold because daughter nucleaus is unstanle with t1/2 aroudn 1e5 years. 
 /process/had/rdm/thresholdForVeryLongDecayTime 1e4 year

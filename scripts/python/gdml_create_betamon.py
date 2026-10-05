@@ -343,8 +343,8 @@ def build_geometry(output_path: str | Path, params: GeometryParams = PARAMS) -> 
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Parse CLI arguments and write the requested GDML export."""
-    parser = argparse.ArgumentParser(description="Generate geometry_export.gdml for BetaMonitor.")
-    parser.add_argument("output", nargs="?", default="./dat/geometry_export_new.gdml", help="Output GDML path.")
+    parser = argparse.ArgumentParser(description="Generate gdml for BetaMonitor.")
+    parser.add_argument("output", nargs="?", default="./dat/betamon_geometry.gdml", help="Output GDML path.")
     args = parser.parse_args(argv)
     print(build_geometry(args.output))
     return 0
