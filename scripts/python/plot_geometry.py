@@ -243,7 +243,7 @@ class GeometryPlotter:
         text_prop.SetColor(*color)
         text_actor.GetPositionCoordinate().SetCoordinateSystemToNormalizedViewport()
         text_actor.SetPosition(pos[0], pos[1])
-        viewer.ren.AddActor2D(text_actor)
+        viewer.ren.AddActor(text_actor)
 
     def add_vtk_point(self, viewer, position, color=(1, 0, 0), radius=2.0):
         sphere = vtk.vtkSphereSource()
@@ -568,7 +568,7 @@ class GeometryPlotter:
 
 
 if __name__ == "__main__":
-    plotter = GeometryPlotter("/Users/harperumfress/dev/BetaMonitor/dat/geometry_export_new.gdml")
+    plotter = GeometryPlotter("/Users/harperumfress/dev/BetaMonitor/dat/betamon_geometry.gdml")
     # dat/geometry_export_new.gdml
     # plotter = GeometryPlotter("/Users/harperumfress/dev/BetaMonitor/dat/original_geometry_export.gdml")
     # plotter = GeometryPlotter("/Users/harperumfress/UW/betamonitor_data/original_singlethread_data/geometry_export.gdml")

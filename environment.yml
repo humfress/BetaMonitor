@@ -1,0 +1,12 @@
+name: betamonitorpy
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - uproot
+  - matplotlib
+  - pyg4ometry
+  - vtk
+  - scipy

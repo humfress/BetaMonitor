@@ -81,7 +81,7 @@ Because the primary particle generation process is using the radioactive decay m
 From the repository root, activate the Conda environment containing `pyg4ometry` and run the generator:
 
 ```bash
-conda activate g4-env-py311
+conda activate betamonitorpy
 python scripts/python/gdml_create_betamon.py
 ```
 
